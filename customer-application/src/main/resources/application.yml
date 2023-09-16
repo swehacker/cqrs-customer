@@ -1,0 +1,67 @@
+server:
+  port: 3001
+
+spring:
+  main:
+    banner-mode: OFF
+  jpa:
+      open-in-view: false
+      show-sql: false
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cqrs-demo?currentSchema=customer&binaryTransfer=true&reWriteBatchedInserts=true
+    username: cqrs-demo
+    password: p@ssw0rd1
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+      mode: always
+      schema-locations: classpath:init-schema.sql
+      data-locations: classpath:init-data.sql
+  flyway:
+    enabled: true
+
+kafka-config:
+  bootstrap-servers: localhost:9092
+  schema-registry-url-key: schema.registry.url
+  schema-registry-url: http://localhost:8081
+  num-of-partitions: 1
+  replication-factor: 1
+
+  producer-config:
+    key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
+    compression-type: snappy
+    acks: all
+    batch-size: 16384
+    batch-size-boost-factor: 100
+    linger-ms: 5
+    request-timeout-ms: 60000
+    retry-count: 3
+
+  consumer-config:
+    group-id: customer-service
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    auto-offset-reset: earliest
+    specific-avro-reader-key: specific.avro.reader
+    specific-avro-reader: true
+    batch-listener: true
+    auto-startup: true
+    concurrency-level: 3
+    session-timeout-ms: 10000
+    heartbeat-interval-ms: 3000
+    max-poll-interval-ms: 300000
+    max-poll-records: 500
+    max-partition-fetch-bytes-default: 1048576
+    max-partition-fetch-bytes-boost-factor: 1
+    poll-timeout-ms: 150
+
+customer-service:
+  topics:
+    customer-created: customer-created
+    customer-anonymized: customer-anonymized

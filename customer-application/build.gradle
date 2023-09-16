@@ -1,5 +1,16 @@
+buildscript {
+    ext {
+        jackson = '2.15.1'
+    }
+}
+
 plugins {
     id 'java'
+    id "io.freefair.lombok" version "8.3"
+    id 'pmd'
+    id 'jacoco'
+    id 'org.springframework.boot' version '3.1.2'
+    id 'io.spring.dependency-management' version '1.1.1'
 }
 
 group = 'swehacker.cqrs'
@@ -10,6 +21,28 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.kafka:spring-kafka:3.0.9'
+
+    implementation 'org.postgresql:postgresql:42.5.4'
+    implementation 'org.flywaydb:flyway-core:9.16.0'
+
+    implementation "com.fasterxml.jackson.core:jackson-core:${jackson}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jackson}"
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:${jackson}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${jackson}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson}"
+    implementation project(path: ':cqrs-core')
+
+    runtimeOnly('net.logstash.logback:logstash-logback-encoder:7.3')
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus:1.10.5'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
