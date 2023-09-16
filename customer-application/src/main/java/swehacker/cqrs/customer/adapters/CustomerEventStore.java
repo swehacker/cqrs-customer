@@ -14,7 +14,6 @@ import swehacker.demo.cqrs.ports.out.EventStore;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +24,7 @@ public class CustomerEventStore implements EventStore {
     private final EventStoreRepository eventStoreRepository;
 
     @Override
+    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
     public void saveEvents(UUID aggregateId, Iterable<BaseEvent<UUID>> events, int expectedVersion) {
         var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
         if (expectedVersion != -1 && eventStream.get(eventStream.size() - 1).getVersion() != expectedVersion) {
@@ -56,7 +56,9 @@ public class CustomerEventStore implements EventStore {
             throw new AggregateNotFoundException("Incorrect Customer ID provided!");
         }
 
-        return eventStream.stream().map(EventModel::getEventData).collect(Collectors.toList());
+        return eventStream.stream()
+                .map(EventModel::getEventData)
+                .toList();
     }
 
     @Override
@@ -65,6 +67,9 @@ public class CustomerEventStore implements EventStore {
         if (eventStream.isEmpty()) {
             throw new IllegalStateException("Could not retrieve event stream from the event store!");
         }
-        return eventStream.stream().map(EventModel::getAggregateIdentifier).distinct().collect(Collectors.toList());
+        return eventStream.stream()
+                .map(EventModel::getAggregateIdentifier)
+                .distinct()
+                .toList();
     }
 }

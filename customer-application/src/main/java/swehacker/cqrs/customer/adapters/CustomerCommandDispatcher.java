@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Service
 public class CustomerCommandDispatcher implements CommandDispatcher {
+    private static final int MAX_NUMBER_OF_HANDLERS = 1;
     private final Map<Class<? extends BaseCommand>, List<CommandHandlerMethod<?>>> routes = new HashMap<>();
 
     public <T extends BaseCommand<UUID>> void registerHandler(Class<T> type, CommandHandlerMethod<T> handler) {
@@ -26,7 +27,7 @@ public class CustomerCommandDispatcher implements CommandDispatcher {
         if (handlers == null || handlers.isEmpty()) {
             throw new RuntimeException("No command handler was registered!");
         }
-        if (handlers.size() > 1) {
+        if (handlers.size() > MAX_NUMBER_OF_HANDLERS) {
             throw new RuntimeException("Cannot send command to more than one handler!");
         }
         handlers.get(0).handle(command);
