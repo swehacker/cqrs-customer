@@ -1,0 +1,20 @@
+package swehacker.cqrs.customer.vo;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+
+public record Customer(
+        CustomerNo customerNo,
+        Email email,
+        Msisdn mobile,
+        String firstName,
+        String lastName,
+        String preferredName,
+        String preferredLanguage,
+        String civicNumber,
+        LocalDate birthDate,
+        List<Address> addresses,
+        List<Consent> consents
+) {
+}

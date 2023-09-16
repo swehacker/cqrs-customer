@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "8.3"
+}
+
+group = 'swehacker.cqrs'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":cqrs-core")
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
