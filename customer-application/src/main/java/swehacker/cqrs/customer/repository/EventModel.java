@@ -1,6 +1,9 @@
-package swehacker.cqrs.customer.application;
+package swehacker.cqrs.customer.repository;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,12 +25,24 @@ import java.util.UUID;
 @Table(name = "eventstore")
 public class EventModel {
     @Id
-    private UUID id;
-    private Instant timeStamp;
-    private String aggregateIdentifier;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "aggregate_id")
+    private UUID aggregateIdentifier;
+
+    @Column(name = "aggregate_type")
     private String aggregateType;
+
     private int version;
+
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private Instant created;
+
+    @Column(name = "event_type")
     private String eventType;
+
+    @Column(name = "event_data")
     @JdbcTypeCode(SqlTypes.JSON)
-    private BaseEvent<?> eventData;
+    private BaseEvent<UUID> eventData;
 }

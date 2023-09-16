@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.vo;
+package swehacker.cqrs.customer.core.vo;
 
 import java.time.LocalDate;
 import java.util.List;

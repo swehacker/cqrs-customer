@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.vo;
+package swehacker.cqrs.customer.core.vo;
 
 import java.text.MessageFormat;
 import java.util.regex.Pattern;

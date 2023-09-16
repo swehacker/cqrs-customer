@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.vo;
+package swehacker.cqrs.customer.core.vo;
 
 public record Address(
         boolean preferred,

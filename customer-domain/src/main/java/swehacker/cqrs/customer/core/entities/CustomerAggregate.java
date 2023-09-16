@@ -1,24 +1,33 @@
-package swehacker.cqrs.customer.entities;
+package swehacker.cqrs.customer.core.entities;
 
-import swehacker.cqrs.customer.commands.RegisterCustomerCommand;
-import swehacker.cqrs.customer.events.CustomerAnonymizedEvent;
-import swehacker.cqrs.customer.events.CustomerRegisteredEvent;
-import swehacker.cqrs.customer.vo.Customer;
-import swehacker.cqrs.customer.vo.CustomerNo;
+import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
+import swehacker.cqrs.customer.core.events.CustomerAnonymizedEvent;
+import swehacker.cqrs.customer.core.events.CustomerRegisteredEvent;
+import swehacker.cqrs.customer.core.vo.Customer;
 import swehacker.demo.cqrs.entities.AggregateRoot;
 
 import java.time.Instant;
+import java.util.UUID;
 
-public class CustomerAggregate extends AggregateRoot<CustomerNo> {
+public class CustomerAggregate extends AggregateRoot<UUID> {
     private Boolean active = false;
 
     private Instant removalDate;
 
     private Customer customer;
 
+    public CustomerAggregate() {
+        super();
+        super.setVersion(-1);
+    }
+
     public CustomerAggregate(RegisterCustomerCommand command) {
         raiseEvent(CustomerRegisteredEvent.builder()
                 .build());
+    }
+
+    public boolean isActive() {
+        return this.active;
     }
 
     public void anonymizeCustomer(String reason) {

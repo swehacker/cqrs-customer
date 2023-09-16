@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.application;
+package swehacker.cqrs.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

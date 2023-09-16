@@ -1,7 +1,7 @@
-package swehacker.cqrs.customer.commands;
+package swehacker.cqrs.customer.core.commands;
 
 import lombok.Builder;
-import swehacker.cqrs.customer.vo.CustomerNo;
+import swehacker.cqrs.customer.core.vo.CustomerNo;
 import swehacker.demo.cqrs.events.BaseEvent;
 
 @Builder

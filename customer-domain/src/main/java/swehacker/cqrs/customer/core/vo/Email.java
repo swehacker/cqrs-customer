@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.vo;
+package swehacker.cqrs.customer.core.vo;
 
 import java.text.MessageFormat;
 import java.util.regex.Pattern;
@@ -7,7 +7,7 @@ public class Email {
     private static final Pattern VALIDATION_REGEXP = Pattern.compile("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
     private final String email;
 
-    Email(String email) {
+    public Email(String email) {
         this.email = validate(email);
     }
 

@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.vo;
+package swehacker.cqrs.customer.core.vo;
 
 import swehacker.demo.cqrs.vo.BaseId;
 

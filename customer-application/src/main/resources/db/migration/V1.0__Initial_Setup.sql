@@ -1,11 +1,12 @@
 CREATE TABLE eventstore
 (
-    id           BIGSERIAL PRIMARY KEY,
-    version      INTEGER   NOT NULL,
-    aggregate_id uuid      NOT NULL DEFAULT gen_random_uuid(),
-    event_type   TEXT      NOT NULL,
-    event_data   jsonb     NOT NULL,
-    created_at   TIMESTAMP NOT NULL DEFAULT now()
+    id             BIGSERIAL PRIMARY KEY,
+    version        INTEGER   NOT NULL,
+    aggregate_id   uuid      NOT NULL DEFAULT gen_random_uuid(),
+    aggregate_type TEXT      NOT NULL,
+    event_type     TEXT      NOT NULL,
+    event_data     jsonb     NOT NULL,
+    created_at     TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE customer

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import swehacker.cqrs.customer.core.vo.Email;
 
 import static org.junit.jupiter.api.Assertions.*;
 
