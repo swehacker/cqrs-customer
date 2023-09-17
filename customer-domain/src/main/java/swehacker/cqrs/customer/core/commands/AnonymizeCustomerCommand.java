@@ -1,10 +1,12 @@
 package swehacker.cqrs.customer.core.commands;
 
-import lombok.Builder;
-import swehacker.cqrs.customer.core.vo.CustomerNo;
-import swehacker.demo.cqrs.events.BaseEvent;
+import swehacker.demo.cqrs.commands.BaseCommand;
 
-@Builder
-public class AnonymizeCustomerCommand extends BaseEvent<CustomerNo> {
+import java.util.UUID;
 
+public class AnonymizeCustomerCommand extends BaseCommand<UUID> {
+
+    public AnonymizeCustomerCommand(UUID id) {
+        super.setId(id);
+    }
 }

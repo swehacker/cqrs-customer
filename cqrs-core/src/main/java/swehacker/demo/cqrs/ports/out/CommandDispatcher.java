@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface CommandDispatcher {
     <T extends BaseCommand<UUID>> void registerHandler(Class<T> type, CommandHandlerMethod<T> handler);
-    void send(BaseCommand<UUID> command);
+    void send(BaseCommand command);
 }

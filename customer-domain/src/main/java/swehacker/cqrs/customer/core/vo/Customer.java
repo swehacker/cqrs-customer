@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record Customer(
-        CustomerNo customerNo,
         Email email,
         Msisdn mobile,
         String firstName,

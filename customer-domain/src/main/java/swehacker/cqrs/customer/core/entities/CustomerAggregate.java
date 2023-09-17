@@ -23,6 +23,8 @@ public class CustomerAggregate extends AggregateRoot<UUID> {
 
     public CustomerAggregate(RegisterCustomerCommand command) {
         raiseEvent(CustomerRegisteredEvent.builder()
+                .id(command.getId())
+                .customer(command.getCustomer())
                 .build());
     }
 
@@ -38,6 +40,7 @@ public class CustomerAggregate extends AggregateRoot<UUID> {
 
     public void apply(CustomerRegisteredEvent event) {
         this.id = event.getId();
+        this.customer = event.getCustomer();
         this.active = true;
     }
 

@@ -1,10 +1,14 @@
 package swehacker.cqrs.customer.core.commands;
 
-import lombok.Builder;
-import swehacker.cqrs.customer.core.vo.CustomerNo;
-import swehacker.demo.cqrs.events.BaseEvent;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
+import swehacker.cqrs.customer.core.vo.Customer;
+import swehacker.demo.cqrs.commands.BaseCommand;
 
-@Builder
-public class RegisterCustomerCommand extends BaseEvent<CustomerNo> {
+import java.util.UUID;
 
+@SuperBuilder
+@Getter
+public class RegisterCustomerCommand extends BaseCommand<UUID> {
+    private Customer customer;
 }
