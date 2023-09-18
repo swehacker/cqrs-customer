@@ -5,17 +5,18 @@ import swehacker.demo.cqrs.events.BaseEvent;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AggregateRoot<K> {
-    protected K id;
+public abstract class AggregateRoot {
+    protected UUID id;
     private int version = -1;
 
-    private final List<BaseEvent<K>> changes = new ArrayList<>();
+    private final List<BaseEvent> changes = new ArrayList<>();
     private final Logger logger = Logger.getLogger(AggregateRoot.class.getName());
 
-    public K getId() {
+    public UUID getId() {
         return this.id;
     }
 
@@ -27,7 +28,7 @@ public abstract class AggregateRoot<K> {
         this.version = version;
     }
 
-    public List<BaseEvent<K>> getUncommittedChanges() {
+    public List<BaseEvent> getUncommittedChanges() {
         return this.changes;
     }
 
@@ -35,7 +36,7 @@ public abstract class AggregateRoot<K> {
         this.changes.clear();
     }
 
-    protected void applyChange(BaseEvent<K> event, Boolean isNewEvent) {
+    protected void applyChange(BaseEvent event, Boolean isNewEvent) {
         try {
             var method = getClass().getDeclaredMethod("apply", event.getClass());
             method.setAccessible(true);
@@ -51,11 +52,11 @@ public abstract class AggregateRoot<K> {
         }
     }
 
-    public void raiseEvent(BaseEvent<K> event) {
+    public void raiseEvent(BaseEvent event) {
         applyChange(event, true);
     }
 
-    public void replayEvents(Iterable<BaseEvent<K>> events) {
+    public void replayEvents(Iterable<? extends BaseEvent> events) {
         events.forEach(event -> applyChange(event, false));
     }
 }

@@ -9,14 +9,14 @@ import swehacker.demo.cqrs.ports.out.EventProducer;
 import swehacker.demo.cqrs.ports.out.EventStore;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerEventSourcingHandler implements EventSourcingHandler<CustomerAggregate, UUID> {
+public class CustomerEventSourcingHandler implements EventSourcingHandler<CustomerAggregate> {
     private final EventStore eventStore;
-
-    private final EventProducer<UUID> eventProducer;
+    private final EventProducer eventProducer;
 
     @Override
     public void save(CustomerAggregate aggregate) {
@@ -27,7 +27,7 @@ public class CustomerEventSourcingHandler implements EventSourcingHandler<Custom
     @Override
     public CustomerAggregate getById(UUID id) {
         var aggregate = new CustomerAggregate();
-        var events = eventStore.getEvents(id);
+        List<? extends BaseEvent> events = eventStore.getEvents(id);
         if (events != null && !events.isEmpty()) {
             aggregate.replayEvents(events);
             var latestVersion = events.stream().map(BaseEvent::getVersion).max(Comparator.naturalOrder());

@@ -31,7 +31,16 @@ public class RegisterCustomerController {
         try {
             commandDispatcher.send(RegisterCustomerCommand.builder()
                     .id(id)
-                    .customer(customer)
+                    .firstName(customer.firstName())
+                    .lastName(customer.lastName())
+                    .preferredName(customer.preferredName())
+                    .civicNumber(customer.civicNumber())
+                    .birthDate(customer.birthDate())
+                    .preferredLanguage(customer.preferredLanguage())
+                    .addresses(customer.addresses())
+                    .mobile(customer.mobile().msisdn())
+                    .email(customer.email().email())
+                    .consents(customer.consents())
                     .build());
             return new ResponseEntity<>(new CreatedResponse("Register customer request completed successfully!", id), HttpStatus.CREATED);
         } catch (IllegalStateException e) {

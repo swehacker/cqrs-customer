@@ -21,7 +21,7 @@ public class MsisdnSerializer extends StdSerializer<Msisdn> {
     @Override
     public void serialize(Msisdn value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
-        gen.writeStringField("msisdn", value.get() );
+        gen.writeStringField("msisdn", value.msisdn() );
         gen.writeEndObject();
     }
 }

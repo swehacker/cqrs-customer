@@ -12,6 +12,6 @@ import swehacker.demo.cqrs.messages.Message;
 @AllArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public abstract class BaseCommand<K> extends Message<K> {
+public abstract class BaseCommand extends Message {
     private int version;
 }

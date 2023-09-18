@@ -1,23 +1,30 @@
-package swehacker.cqrs.customer.core.events;
+package swehacker.cqrs.customer.repository;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import swehacker.cqrs.customer.core.vo.Address;
 import swehacker.cqrs.customer.core.vo.Consent;
-import swehacker.demo.cqrs.events.BaseEvent;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
-@SuperBuilder
+@Data
+@Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class CustomerRegisteredEvent extends BaseEvent {
+@Table(name = "customer")
+public class CustomerEntity {
+    @Id
+    UUID id;
     String email;
     String mobile;
     String firstName;
@@ -26,6 +33,8 @@ public class CustomerRegisteredEvent extends BaseEvent {
     String preferredLanguage;
     String civicNumber;
     LocalDate birthDate;
+    @JdbcTypeCode(value = SqlTypes.JSON)
     List<Address> addresses;
+    @JdbcTypeCode(value = SqlTypes.JSON)
     List<Consent> consents;
 }

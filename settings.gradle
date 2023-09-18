@@ -2,4 +2,3 @@ rootProject.name = 'cqrs-customer'
 include 'cqrs-core'
 include 'customer-domain'
 include 'customer-application'
-

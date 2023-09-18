@@ -1,7 +1,7 @@
 package swehacker.cqrs.customer;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import swehacker.cqrs.customer.core.commands.AnonymizeCustomerCommand;
@@ -9,18 +9,16 @@ import swehacker.cqrs.customer.core.commands.CommandHandler;
 import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
 import swehacker.demo.cqrs.ports.out.CommandDispatcher;
 
+@RequiredArgsConstructor
 @SpringBootApplication
 public class CustomerServiceApplication {
-    @Autowired
-    private CommandDispatcher commandDispatcher;
-
-    @Autowired
-    private CommandHandler commandHandler;
+    private final CommandDispatcher commandDispatcher;
+    private final CommandHandler commandHandler;
 
     @PostConstruct
     public void registerHandlers() {
-        commandDispatcher.registerHandler(RegisterCustomerCommand.class, command -> commandHandler.handle((RegisterCustomerCommand) command) );
-        commandDispatcher.registerHandler(AnonymizeCustomerCommand.class, command -> commandHandler.handle((AnonymizeCustomerCommand)command));
+        commandDispatcher.registerHandler(RegisterCustomerCommand.class, commandHandler::handle);
+        commandDispatcher.registerHandler(AnonymizeCustomerCommand.class, commandHandler::handle);
     }
 
     public static void main(String[] args) {

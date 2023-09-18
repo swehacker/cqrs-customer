@@ -1,7 +1,9 @@
 package swehacker.demo.cqrs.handlers;
 
-public interface EventSourcingHandler<T,K> {
+import java.util.UUID;
+
+public interface EventSourcingHandler<T> {
     void save(T aggregate);
-    T getById(K id);
+    T getById(UUID id);
     void republishEvents();
 }

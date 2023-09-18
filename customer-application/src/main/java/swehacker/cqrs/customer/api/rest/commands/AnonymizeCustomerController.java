@@ -27,13 +27,16 @@ public class AnonymizeCustomerController {
     @DeleteMapping(path = "/{id}/anonymize")
     public ResponseEntity<BaseResponse> closeAccount(@PathVariable(value = "id") UUID id) {
         try {
-            commandDispatcher.send(new AnonymizeCustomerCommand(id));
-            return new ResponseEntity<>(new BaseResponse("Bank account closure request successfully completed!"), HttpStatus.OK);
+            commandDispatcher.send(AnonymizeCustomerCommand.builder()
+                    .id(id)
+                    .reason("Whatever")
+                    .build());
+            return new ResponseEntity<>(new BaseResponse("Anonymize customer successfully completed!"), HttpStatus.OK);
         } catch (IllegalStateException | AggregateNotFoundException e) {
             log.warn(MessageFormat.format("Client made a bad request - {0}.", e.toString()));
             return new ResponseEntity<>(new BaseResponse(e.toString()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            var safeErrorMessage = MessageFormat.format("Error while processing request to close bank account with id - {0}.", id);
+            var safeErrorMessage = MessageFormat.format("Error while processing request to anonymize customer with id - {0}.", id);
             log.error(safeErrorMessage, e);
             return new ResponseEntity<>(new BaseResponse(safeErrorMessage), HttpStatus.INTERNAL_SERVER_ERROR);
         }

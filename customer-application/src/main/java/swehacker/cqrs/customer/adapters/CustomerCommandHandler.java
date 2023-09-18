@@ -9,13 +9,11 @@ import swehacker.cqrs.customer.core.commands.RestoreReadDbCommand;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
 import swehacker.demo.cqrs.handlers.EventSourcingHandler;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class CustomerCommandHandler implements CommandHandler {
 
-    private final EventSourcingHandler<CustomerAggregate, UUID> eventSourcingHandler;
+    private final EventSourcingHandler<CustomerAggregate> eventSourcingHandler;
 
     @Override
     public void handle(RegisterCustomerCommand command) {
@@ -26,6 +24,7 @@ public class CustomerCommandHandler implements CommandHandler {
     @Override
     public void handle(AnonymizeCustomerCommand command) {
         var aggregate = eventSourcingHandler.getById(command.getId());
+        aggregate.anonymizeCustomer(command.getReason());
         eventSourcingHandler.save(aggregate);
     }
 

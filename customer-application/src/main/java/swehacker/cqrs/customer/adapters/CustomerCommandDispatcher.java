@@ -9,14 +9,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class CustomerCommandDispatcher implements CommandDispatcher {
     private static final int MAX_NUMBER_OF_HANDLERS = 1;
-    private final Map<Class<? extends BaseCommand>, List<CommandHandlerMethod<?>>> routes = new HashMap<>();
+    private final Map<Class<? extends BaseCommand>, List<CommandHandlerMethod>> routes = new HashMap<>();
 
-    public <T extends BaseCommand<UUID>> void registerHandler(Class<T> type, CommandHandlerMethod<T> handler) {
+    public <T extends BaseCommand> void registerHandler(Class<T> type, CommandHandlerMethod<T> handler) {
         var handlers = routes.computeIfAbsent(type, c -> new LinkedList<>());
         handlers.add(handler);
     }

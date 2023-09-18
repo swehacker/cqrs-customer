@@ -7,9 +7,8 @@ import swehacker.cqrs.customer.core.vo.Customer;
 import swehacker.demo.cqrs.entities.AggregateRoot;
 
 import java.time.Instant;
-import java.util.UUID;
 
-public class CustomerAggregate extends AggregateRoot<UUID> {
+public class CustomerAggregate extends AggregateRoot {
     private Boolean active = false;
 
     private Instant removalDate;
@@ -24,7 +23,16 @@ public class CustomerAggregate extends AggregateRoot<UUID> {
     public CustomerAggregate(RegisterCustomerCommand command) {
         raiseEvent(CustomerRegisteredEvent.builder()
                 .id(command.getId())
-                .customer(command.getCustomer())
+                .firstName(command.getFirstName())
+                .lastName(command.getLastName())
+                .preferredName(command.getPreferredName())
+                .civicNumber(command.getCivicNumber())
+                .birthDate(command.getBirthDate())
+                .preferredLanguage(command.getPreferredLanguage())
+                .addresses(command.getAddresses())
+                .mobile(command.getMobile())
+                .email(command.getEmail())
+                .consents(command.getConsents())
                 .build());
     }
 
@@ -34,17 +42,19 @@ public class CustomerAggregate extends AggregateRoot<UUID> {
 
     public void anonymizeCustomer(String reason) {
         raiseEvent(CustomerAnonymizedEvent.builder()
+                .id(getId())
                 .reason(reason)
                 .build());
     }
 
     public void apply(CustomerRegisteredEvent event) {
         this.id = event.getId();
-        this.customer = event.getCustomer();
+        //this.customer = event.getCustomer();
         this.active = true;
     }
 
     public void apply(CustomerAnonymizedEvent event) {
+        this.id = event.getId();
         this.active = false;
         this.removalDate = Instant.now();
     }

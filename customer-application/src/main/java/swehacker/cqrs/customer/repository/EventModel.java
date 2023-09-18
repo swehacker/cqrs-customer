@@ -12,7 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import swehacker.demo.cqrs.events.BaseEvent;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -44,5 +43,5 @@ public class EventModel {
 
     @Column(name = "event_data")
     @JdbcTypeCode(SqlTypes.JSON)
-    private BaseEvent<UUID> eventData;
+    private String eventData;
 }

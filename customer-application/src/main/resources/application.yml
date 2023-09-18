@@ -5,9 +5,14 @@ spring:
   main:
     banner-mode: OFF
   kafka:
+      properties:
+        spring.json.trusted.packages: "*"
       bootstrap-servers: localhost:19092
       listener:
         ack-mode: MANUAL_IMMEDIATE
+      producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       consumer:
         group-id: customer-service
         auto-offset-reset: earliest
@@ -56,7 +61,7 @@ kafka-config:
   consumer-config:
     group-id: customer-service
     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     auto-offset-reset: earliest
     #specific-avro-reader-key: specific.avro.reader
     #specific-avro-reader: true

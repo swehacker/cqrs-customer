@@ -1,14 +1,25 @@
 package swehacker.cqrs.customer.core.commands;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.experimental.SuperBuilder;
-import swehacker.cqrs.customer.core.vo.Customer;
+import swehacker.cqrs.customer.core.vo.Address;
+import swehacker.cqrs.customer.core.vo.Consent;
 import swehacker.demo.cqrs.commands.BaseCommand;
 
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.List;
 
 @SuperBuilder
-@Getter
-public class RegisterCustomerCommand extends BaseCommand<UUID> {
-    private Customer customer;
+@Data
+public class RegisterCustomerCommand extends BaseCommand {
+    String email;
+    String mobile;
+    String firstName;
+    String lastName;
+    String preferredName;
+    String preferredLanguage;
+    String civicNumber;
+    LocalDate birthDate;
+    List<Address> addresses;
+    List<Consent> consents;
 }

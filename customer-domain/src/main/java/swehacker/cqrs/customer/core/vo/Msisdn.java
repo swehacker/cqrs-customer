@@ -12,7 +12,7 @@ public class Msisdn {
         this.msisdn = validate(msisdn);
     }
 
-    public String get() {
+    public String msisdn() {
         return msisdn;
     }
 
