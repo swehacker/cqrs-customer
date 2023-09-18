@@ -1,5 +1,9 @@
 ## Description
 
+### Use cases
+
+![Use Cases](docs/images/customer-usecases.png)
+
 ## Architecture
 
 The system is built upon Clean Architecture where the outer layer only knows about the inner layers, and they are
