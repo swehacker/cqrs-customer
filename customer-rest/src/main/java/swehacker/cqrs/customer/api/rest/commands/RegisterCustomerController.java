@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import swehacker.cqrs.customer.api.rest.dto.BaseResponse;
+import swehacker.cqrs.customer.api.rest.dto.RegisterCustomerDto;
 import swehacker.cqrs.customer.api.rest.dto.CreatedResponse;
 import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
-import swehacker.cqrs.customer.core.vo.Customer;
+import swehacker.cqrs.customer.core.vo.Email;
+import swehacker.cqrs.customer.core.vo.Msisdn;
 import swehacker.cqrs.customer.ports.out.CommandDispatcher;
 
 import java.text.MessageFormat;
@@ -26,7 +28,7 @@ public class RegisterCustomerController {
     private final CommandDispatcher commandDispatcher;
 
     @PostMapping
-    public ResponseEntity<BaseResponse> register(@RequestBody Customer customer) {
+    public ResponseEntity<BaseResponse> register(@RequestBody RegisterCustomerDto customer) {
         var id = UUID.randomUUID();
         try {
             commandDispatcher.send(RegisterCustomerCommand.builder()
@@ -38,8 +40,8 @@ public class RegisterCustomerController {
                     .birthDate(customer.birthDate())
                     .preferredLanguage(customer.preferredLanguage())
                     .addresses(customer.addresses())
-                    .mobile(customer.mobile().msisdn())
-                    .email(customer.email().email())
+                    .mobile(new Msisdn(customer.mobile()))
+                    .email(new Email(customer.email()))
                     .consents(customer.consents())
                     .build());
             return new ResponseEntity<>(new CreatedResponse("Register customer request completed successfully!", id), HttpStatus.CREATED);

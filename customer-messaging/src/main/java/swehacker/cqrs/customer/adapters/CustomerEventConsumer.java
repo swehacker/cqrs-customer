@@ -15,14 +15,14 @@ public class CustomerEventConsumer implements EventConsumer {
     private final EventHandler eventHandler;
 
     @Override
-    @KafkaListener(topics = "CustomerRegisteredEvent", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "CustomerRegisteredEvent", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
     public void consume(@Payload CustomerRegisteredEvent event, Acknowledgment ack) {
         this.eventHandler.on(event);
         ack.acknowledge();
     }
 
     @Override
-    @KafkaListener(topics = "CustomerAnonymizedEvent", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "CustomerAnonymizedEvent", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
     public void consume(@Payload CustomerAnonymizedEvent event, Acknowledgment ack) {
         this.eventHandler.on(event);
         ack.acknowledge();

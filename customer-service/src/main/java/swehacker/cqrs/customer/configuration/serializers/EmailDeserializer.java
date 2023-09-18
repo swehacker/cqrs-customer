@@ -22,6 +22,6 @@ public class EmailDeserializer extends StdDeserializer<Email> {
     @Override
     public Email deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
-        return new Email(node.asText());
+        return new Email(node.get("email").asText());
     }
 }

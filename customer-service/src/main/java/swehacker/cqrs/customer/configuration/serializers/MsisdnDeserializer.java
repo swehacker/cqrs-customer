@@ -22,6 +22,6 @@ public class MsisdnDeserializer extends StdDeserializer<Msisdn> {
     @Override
     public Msisdn deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
-        return new Msisdn(node.asText());
+        return new Msisdn(node.get("msisdn").asText());
     }
 }

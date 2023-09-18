@@ -1,17 +1,18 @@
 package swehacker.cqrs.customer;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import swehacker.cqrs.customer.ports.out.EventHandler;
 import swehacker.cqrs.customer.core.events.CustomerAnonymizedEvent;
 import swehacker.cqrs.customer.core.events.CustomerRegisteredEvent;
+import swehacker.cqrs.customer.ports.out.EventHandler;
 import swehacker.cqrs.customer.repository.CustomerEntity;
 import swehacker.cqrs.customer.repository.CustomerRepository;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerEventHandler implements EventHandler {
-    @Autowired
-    private CustomerRepository customerRepository;
+    public static final String ANONYMIZED = "Anonymized";
+    private final CustomerRepository customerRepository;
 
     @Override
     public void on(CustomerRegisteredEvent event) {
@@ -23,8 +24,8 @@ public class CustomerEventHandler implements EventHandler {
                 .preferredLanguage(event.getPreferredLanguage())
                 .consents(event.getConsents())
                 .birthDate(event.getBirthDate())
-                .mobile(event.getMobile())
-                .email(event.getEmail())
+                .mobile(event.getMobile().msisdn())
+                .email(event.getEmail().email())
                 .civicNumber(event.getCivicNumber())
                 .addresses(event.getAddresses())
                 .build();
@@ -39,9 +40,13 @@ public class CustomerEventHandler implements EventHandler {
         }
 
         CustomerEntity customer = optionalCustomer.get();
+        customer.setFirstName(ANONYMIZED);
+        customer.setLastName(ANONYMIZED);
+        customer.setPreferredName(ANONYMIZED);
+        customer.setCivicNumber(ANONYMIZED);
+        customer.setMobile(ANONYMIZED);
+        customer.setEmail(ANONYMIZED);
         customer.setAddresses(null);
-        customer.setEmail("");
-        customer.setCivicNumber("");
         customerRepository.save(customer);
     }
 }
