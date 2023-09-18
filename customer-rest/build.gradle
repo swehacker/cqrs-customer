@@ -12,7 +12,6 @@ plugins {
 }
 
 group = 'swehacker.cqrs'
-version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -21,6 +20,9 @@ repositories {
 dependencies {
     implementation project(':cqrs-core')
     implementation project(':customer-domain')
+    implementation project(':customer-application')
+    implementation 'org.springframework.boot:spring-boot-starter-websocket:3.1.2'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.1.2'
 
     implementation "com.fasterxml.jackson.core:jackson-core:${jackson}"
     implementation "com.fasterxml.jackson.core:jackson-annotations:${jackson}"

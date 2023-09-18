@@ -1,6 +1,7 @@
 package swehacker.cqrs.customer.core.commands;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import swehacker.cqrs.customer.core.vo.Address;
 import swehacker.cqrs.customer.core.vo.Consent;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @SuperBuilder
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class RegisterCustomerCommand extends BaseCommand {
     String email;
     String mobile;
