@@ -2,7 +2,6 @@ package swehacker.cqrs.customer.messaging.commandhandlers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import swehacker.cqrs.customer.core.commands.CommandHandler;
 import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
 import swehacker.demo.cqrs.commands.BaseCommand;
