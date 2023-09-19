@@ -29,8 +29,12 @@ to a different implementation.
 
 A microservice has at least three parts to separate layers and dependencies, I chose to split up the infrastructure (
 rest, messaging, database in its own projects).
+The container is the service itself.
 
 ![](docs/images/microservice-dependencies.png)
+
+Again, the outher layers have dependencies to the inner layer. This is how I chosen to set up the projects.
+![](docs/images/clean-architecture-project-structure.png)
 
 | Module        | Description                                                                              |
 |---------------|------------------------------------------------------------------------------------------|
