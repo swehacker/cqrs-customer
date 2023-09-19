@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.adapters;
+package swehacker.cqrs.customer.messaging.adapters;
 
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;

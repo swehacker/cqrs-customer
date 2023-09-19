@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.adapters;
+package swehacker.cqrs.customer.messaging.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
