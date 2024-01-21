@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import swehacker.cqrs.customer.api.rest.dto.BaseResponse;
 import swehacker.cqrs.customer.core.commands.RestoreReadDbCommand;
-import swehacker.cqrs.customer.ports.out.CommandDispatcher;
+import swehacker.cqrs.customer.ports.in.CommandDispatcher;
 
 import java.text.MessageFormat;
 

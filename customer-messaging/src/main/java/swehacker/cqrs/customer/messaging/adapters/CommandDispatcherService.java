@@ -2,10 +2,9 @@ package swehacker.cqrs.customer.messaging.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import swehacker.cqrs.customer.ports.out.CommandDispatcher;
+import swehacker.cqrs.customer.ports.in.CommandDispatcher;
 import swehacker.demo.cqrs.commands.BaseCommand;
 import swehacker.demo.cqrs.commands.CommandHandlerMethod;
-import swehacker.demo.cqrs.events.BaseEvent;
 
 import java.util.List;
 

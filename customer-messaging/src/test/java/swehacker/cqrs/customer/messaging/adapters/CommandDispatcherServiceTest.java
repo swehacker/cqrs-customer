@@ -12,7 +12,7 @@ import swehacker.cqrs.customer.core.entities.CustomerAggregate;
 import swehacker.cqrs.customer.messaging.commandhandlers.AnonymizeCustomerCommandHandler;
 import swehacker.cqrs.customer.messaging.commandhandlers.RegisterCustomerCommandHandler;
 import swehacker.cqrs.customer.messaging.commandhandlers.RestoreReadDbCommandHandler;
-import swehacker.cqrs.customer.ports.out.CommandDispatcher;
+import swehacker.cqrs.customer.ports.in.CommandDispatcher;
 import swehacker.demo.cqrs.handlers.EventSourcingHandler;
 
 import java.util.UUID;

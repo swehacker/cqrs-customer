@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
 import swehacker.demo.cqrs.events.BaseEvent;
 import swehacker.demo.cqrs.handlers.EventSourcingHandler;
-import swehacker.cqrs.customer.ports.out.EventProducer;
+import swehacker.cqrs.customer.ports.out.EventPublisher;
 import swehacker.cqrs.customer.ports.out.EventStore;
 
 import java.util.Comparator;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerEventSourcingHandler implements EventSourcingHandler<CustomerAggregate> {
     private final EventStore eventStore;
-    private final EventProducer eventProducer;
+    private final EventPublisher eventProducer;
 
     @Override
     public void save(CustomerAggregate aggregate) {

@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.ports.out;
+package swehacker.cqrs.customer.ports.in;
 
 import swehacker.demo.cqrs.commands.BaseCommand;
 

@@ -12,7 +12,7 @@ import swehacker.cqrs.customer.repository.EventStoreRepository;
 import swehacker.demo.cqrs.events.BaseEvent;
 import swehacker.demo.cqrs.exceptions.AggregateNotFoundException;
 import swehacker.demo.cqrs.exceptions.ConcurrencyException;
-import swehacker.cqrs.customer.ports.out.EventProducer;
+import swehacker.cqrs.customer.ports.out.EventPublisher;
 import swehacker.cqrs.customer.ports.out.EventStore;
 
 import java.time.Instant;
@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerEventStore implements EventStore {
 
-    private final EventProducer eventProducer;
+    private final EventPublisher eventProducer;
     private final EventStoreRepository eventStoreRepository;
     private final ObjectMapper objectMapper;
 

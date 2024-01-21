@@ -14,7 +14,7 @@ import swehacker.cqrs.customer.api.rest.dto.CreatedResponse;
 import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
 import swehacker.cqrs.customer.core.vo.Email;
 import swehacker.cqrs.customer.core.vo.Msisdn;
-import swehacker.cqrs.customer.ports.out.CommandDispatcher;
+import swehacker.cqrs.customer.ports.in.CommandDispatcher;
 
 import java.text.MessageFormat;
 import java.util.UUID;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import swehacker.cqrs.customer.api.rest.dto.BaseResponse;
 import swehacker.cqrs.customer.core.commands.AnonymizeCustomerCommand;
 import swehacker.demo.cqrs.exceptions.AggregateNotFoundException;
-import swehacker.cqrs.customer.ports.out.CommandDispatcher;
+import swehacker.cqrs.customer.ports.in.CommandDispatcher;
 
 import java.text.MessageFormat;
 import java.util.UUID;
