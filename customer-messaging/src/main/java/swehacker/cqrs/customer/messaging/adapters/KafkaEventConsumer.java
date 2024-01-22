@@ -13,7 +13,7 @@ import swehacker.cqrs.customer.ports.out.EventHandler;
 @RequiredArgsConstructor
 @Service
 @KafkaListener(topics = "cqrs.demo.events", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
-public class CustomerEventConsumer implements EventConsumer {
+public class KafkaEventConsumer implements EventConsumer {
     private final EventHandler eventHandler;
 
     @Override

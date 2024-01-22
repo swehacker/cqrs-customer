@@ -1,4 +1,4 @@
-package swehacker.cqrs.customer.messaging.adapters;
+package swehacker.cqrs.customer.commands;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CommandDispatcherService implements CommandDispatcher {
+public class CommandGateway implements CommandDispatcher {
 
     private final List<CommandHandlerMethod<?>> commandHandlerMethods;
 

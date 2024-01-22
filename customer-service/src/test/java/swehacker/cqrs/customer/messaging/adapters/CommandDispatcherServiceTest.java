@@ -6,6 +6,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import swehacker.cqrs.customer.commands.CommandGateway;
 import swehacker.cqrs.customer.core.commands.AnonymizeCustomerCommand;
 import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
@@ -21,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {CommandDispatcherService.class, AnonymizeCustomerCommandHandler.class, RegisterCustomerCommandHandler.class, RestoreReadDbCommandHandler.class})
+@SpringBootTest(classes = {CommandGateway.class, AnonymizeCustomerCommandHandler.class, RegisterCustomerCommandHandler.class, RestoreReadDbCommandHandler.class})
 @ExtendWith(MockitoExtension.class)
 class CommandDispatcherServiceTest {
 

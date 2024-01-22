@@ -1,5 +1,6 @@
 package swehacker.cqrs.customer.api.rest.commands;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class RegisterCustomerController {
     private final CommandDispatcher commandDispatcher;
 
     @PostMapping
-    public ResponseEntity<BaseResponse> register(@RequestBody RegisterCustomerDto customer) {
+    public ResponseEntity<BaseResponse> register(@RequestBody @Valid RegisterCustomerDto customer) {
         var id = UUID.randomUUID();
         try {
             commandDispatcher.send(RegisterCustomerCommand.builder()
