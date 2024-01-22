@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
+import swehacker.cqrs.customer.ports.out.EventPublisher;
+import swehacker.cqrs.customer.ports.out.EventStore;
 import swehacker.cqrs.customer.repository.EventModel;
 import swehacker.cqrs.customer.repository.EventStoreRepository;
 import swehacker.demo.cqrs.events.BaseEvent;
 import swehacker.demo.cqrs.exceptions.AggregateNotFoundException;
 import swehacker.demo.cqrs.exceptions.ConcurrencyException;
-import swehacker.cqrs.customer.ports.out.EventPublisher;
-import swehacker.cqrs.customer.ports.out.EventStore;
 
 import java.time.Instant;
 import java.util.List;
@@ -50,7 +50,7 @@ public class CustomerEventStore implements EventStore {
                         .build();
                 var persistedEvent = eventStoreRepository.save(eventModel);
                 if (persistedEvent.getId() != -1) {
-                    eventProducer.produce(event.getClass().getSimpleName(), event);
+                    eventProducer.publish(event);
                 }
             }
         } catch (JacksonException jacksonException) {

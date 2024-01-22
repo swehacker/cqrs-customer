@@ -1,46 +1,10 @@
-buildscript {
-    ext {
-        jackson = '2.15.1'
-    }
-}
-
-plugins {
-    id 'java'
-    id "io.freefair.lombok" version "8.4"
-    id 'pmd'
-    id 'jacoco'
-}
-
 group = 'swehacker.cqrs'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation project(':cqrs-core')
     implementation project(':customer-domain')
     implementation project(':customer-application')
-    implementation project(':customer-dataaccess')
-    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.0'
-    implementation 'org.springframework.kafka:spring-kafka:3.0.9'
 
-    implementation 'org.postgresql:postgresql:42.5.4'
-    implementation 'org.flywaydb:flyway-core:9.16.0'
-
-    implementation "com.fasterxml.jackson.core:jackson-core:${jackson}"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:${jackson}"
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
-    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:${jackson}"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${jackson}"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson}"
-
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.2'
-    testImplementation 'org.mockito:mockito-core:5.5.0'
-}
-
-test {
-    useJUnitPlatform()
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation "org.springframework.kafka:spring-kafka:${versions.spring_kafka}"
 }

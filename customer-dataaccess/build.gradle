@@ -1,29 +1,12 @@
-plugins {
-    id 'java-library'
-    id "io.freefair.lombok" version "8.4"
-    id 'pmd'
-    id 'jacoco'
-}
-
 group = 'swehacker.cqrs'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation project(':cqrs-core')
     implementation project(':customer-domain')
     implementation project(':customer-application')
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.2.0'
-    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    implementation 'org.postgresql:postgresql:42.5.4'
-    implementation 'org.flywaydb:flyway-core:9.16.0'
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-test {
-    useJUnitPlatform()
+    implementation "org.postgresql:postgresql:${versions.postgres}"
+    implementation "org.flywaydb:flyway-core:${versions.flyway}"
 }

@@ -5,12 +5,9 @@ name: cqrs-demo
 services:
   database:
     hostname: database
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
-        mode: host
+      - "5432:5432"
     volumes:
       - database_data:/var/lib/postgresql/data
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d

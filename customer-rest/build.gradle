@@ -1,40 +1,10 @@
-buildscript {
-    ext {
-        jackson = '2.15.1'
-    }
-}
-
-plugins {
-    id 'java'
-    id "io.freefair.lombok" version "8.4"
-    id 'pmd'
-    id 'jacoco'
-}
-
 group = 'swehacker.cqrs'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation project(':cqrs-core')
     implementation project(':customer-domain')
     implementation project(':customer-application')
-    implementation 'org.springframework.boot:spring-boot-starter-websocket:3.2.0'
-    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    implementation "com.fasterxml.jackson.core:jackson-core:${jackson}"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:${jackson}"
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
-    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:${jackson}"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${jackson}"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson}"
-
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-test {
-    useJUnitPlatform()
 }

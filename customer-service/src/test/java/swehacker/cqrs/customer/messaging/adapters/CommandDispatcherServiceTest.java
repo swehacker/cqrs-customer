@@ -9,9 +9,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import swehacker.cqrs.customer.core.commands.AnonymizeCustomerCommand;
 import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
-import swehacker.cqrs.customer.messaging.commandhandlers.AnonymizeCustomerCommandHandler;
-import swehacker.cqrs.customer.messaging.commandhandlers.RegisterCustomerCommandHandler;
-import swehacker.cqrs.customer.messaging.commandhandlers.RestoreReadDbCommandHandler;
+import swehacker.cqrs.customer.commands.handlers.AnonymizeCustomerCommandHandler;
+import swehacker.cqrs.customer.commands.handlers.RegisterCustomerCommandHandler;
+import swehacker.cqrs.customer.commands.handlers.RestoreReadDbCommandHandler;
 import swehacker.cqrs.customer.ports.in.CommandDispatcher;
 import swehacker.demo.cqrs.handlers.EventSourcingHandler;
 

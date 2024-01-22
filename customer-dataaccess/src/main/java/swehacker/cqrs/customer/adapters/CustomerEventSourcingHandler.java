@@ -44,7 +44,7 @@ public class CustomerEventSourcingHandler implements EventSourcingHandler<Custom
             if (aggregate == null || !aggregate.isActive()) continue;
             var events = eventStore.getEvents(aggregateId);
             for(var event: events) {
-                eventProducer.produce(event.getClass().getSimpleName(), event);
+                eventProducer.publish(event);
             }
         }
     }

@@ -8,12 +8,13 @@ import swehacker.cqrs.customer.ports.out.EventPublisher;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerEventProducer implements EventPublisher {
+public class KafkaEventPublisher implements EventPublisher {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private static final String TOPIC = "cqrs.demo.events";
 
     @Override
-    public void produce(String topic, BaseEvent event) {
-        this.kafkaTemplate.send(topic, event);
+    public void publish(BaseEvent event) {
+        this.kafkaTemplate.send(TOPIC, event);
     }
 }

@@ -1,8 +1,8 @@
-package swehacker.cqrs.customer.messaging.commandhandlers;
+package swehacker.cqrs.customer.commands.handlers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import swehacker.cqrs.customer.core.commands.RestoreReadDbCommand;
+import swehacker.cqrs.customer.core.commands.RegisterCustomerCommand;
 import swehacker.cqrs.customer.core.entities.CustomerAggregate;
 import swehacker.demo.cqrs.commands.BaseCommand;
 import swehacker.demo.cqrs.commands.CommandHandlerMethod;
@@ -10,17 +10,18 @@ import swehacker.demo.cqrs.handlers.EventSourcingHandler;
 
 @Service
 @RequiredArgsConstructor
-public class RestoreReadDbCommandHandler implements CommandHandlerMethod<RestoreReadDbCommand> {
+public class RegisterCustomerCommandHandler implements CommandHandlerMethod<RegisterCustomerCommand> {
 
     private final EventSourcingHandler<CustomerAggregate> eventSourcingHandler;
 
     @Override
-    public Class<RestoreReadDbCommand> getCommandClass() {
-        return RestoreReadDbCommand.class;
+    public Class<RegisterCustomerCommand> getCommandClass() {
+        return RegisterCustomerCommand.class;
     }
 
     @Override
     public void handle(BaseCommand command) {
-        eventSourcingHandler.republishEvents();
+        var aggregate = new CustomerAggregate((RegisterCustomerCommand) command);
+        eventSourcingHandler.save(aggregate);
     }
 }

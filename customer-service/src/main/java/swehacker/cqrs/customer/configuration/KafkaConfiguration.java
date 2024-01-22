@@ -25,7 +25,7 @@ public class KafkaConfiguration {
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
         DefaultKafkaProducerFactory<String, Object> producerFactory =
-                new DefaultKafkaProducerFactory<>(common.buildProducerProperties());
+                new DefaultKafkaProducerFactory<>(common.buildProducerProperties(null));
         producerFactory.setValueSerializer(new JsonSerializer<>(objectMapper));
         return producerFactory;
     }
@@ -39,7 +39,7 @@ public class KafkaConfiguration {
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         DefaultKafkaConsumerFactory<String, Object> consumerFactory =
-                new DefaultKafkaConsumerFactory<>(common.buildConsumerProperties());
+                new DefaultKafkaConsumerFactory<>(common.buildConsumerProperties(null));
         consumerFactory.setValueDeserializer(new JsonDeserializer<>(objectMapper));
         return consumerFactory;
     }
