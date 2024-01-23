@@ -1,8 +1,6 @@
 group = 'swehacker.cqrs'
 
-repositories {
-    mavenCentral()
-}
+apply plugin: "org.springframework.boot"
 
 dependencies {
     implementation project(':cqrs-core')
@@ -20,6 +18,7 @@ dependencies {
 
     implementation "org.postgresql:postgresql:${versions.postgres}"
     implementation "org.flywaydb:flyway-core:${versions.flyway}"
+    implementation "org.flywaydb:flyway-database-postgresql:${versions.flyway}"
 
     implementation "com.fasterxml.jackson.core:jackson-core:${versions.jackson}"
     implementation "com.fasterxml.jackson.core:jackson-annotations:${versions.jackson}"
